@@ -11,11 +11,11 @@ def home(request):
         phone = request.POST['phone']
         date  = request.POST['date']
         t= Table(name = name , email = email ,phone = phone , date = date)
+
         t.save()
         var1 = True
         # return  HttpResponse('data submitted..')
         return render(request,'mprapp/home.html',{'var1':var1})
 
-    var2 = True
 
-    return render(request,'mprapp/home.html',{'var2':var2})
+    return render(request,'mprapp/home.html')
