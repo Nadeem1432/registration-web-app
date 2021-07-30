@@ -1,0 +1,147 @@
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+      {% load static %}
+      <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+      <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'></link>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
+
+      <!------ Include the above in your HEAD tag ---------->
+      
+      <!-- Include the above in your HEAD tag -->
+      
+      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+      <link rel="stylesheet" href="{% static 'mycss/styles.css' %}">
+      <div class="main">
+          
+          
+          <div class="container">
+      <center>
+      <div class="middle">
+            <div id="login">
+      
+              <form action="{%  url 'home' %}" method="POST" onsubmit="return validate();">
+                          {% csrf_token %}
+                <fieldset class="clearfix">
+      
+                  <p>
+                    <span class="fa fa-user">
+                    </span><input type="text"  autocomplete="off" Placeholder="Enter Name Here" name = 'name' id='name' >
+                    <span  id="name_err" style="color:#F00;font-weight:bold;display:none"><small>*Please enter name!!</small></span>
+                  </p> 
+
+                  <p><span class="fa fa-envelope"></span><input type="email" autocomplete="off" Placeholder="Enter Email Here" name = 'email' id='email' >
+                    <span  id="email_err" style="color:#F00;font-weight:bold;display:none"><small>*Please enter email !!!</small></span></p> 
+                  <p><span class="fa fa-phone"></span><input type="text" autocomplete="off" Placeholder="Phone Number Here"  name = 'phone' id='phone' >
+                    <span  id="phone_err" style="color:#F00;font-weight:bold;display:none"><small>*Please enter phone !!!</small></span></p> 
+                  <p><span class="fa fa-birthday-cake"></span><input type="date" autocomplete="off" Placeholder="Date Of Birth"  name = 'date' id='date'>
+                    <span  id="date_err" style="color:#F00;font-weight:bold;display:none"><small>*Please enter Date of birth</small></span></p> 
+                  
+                <div>
+                 
+                  <span style="width:10%; text-align:right;  display: inline-block;"><input type="submit" value="Registration" ></span>
+              </div>
+      
+                </fieldset>
+      <div class="clearfix"></div>
+              </form>
+      
+              <div class="clearfix"></div>
+      
+            </div> <!-- end login -->
+            <div class="logo"> Assignment Project
+                
+                <div class="clearfix"></div>
+            </div>
+            
+            </div>
+      </center>
+          </div>
+      
+      </div>
+<script>
+  function validate(){
+    
+
+    var name  =  $('#name').val();
+    var email =  $('#email').val();
+    var phone =  $('#phone').val();
+    var date  =  $('#date').val();
+
+    var dob = new Date(date);
+    var month_diff = Date.now() - dob.getTime();  
+    var age_dt = new Date(month_diff);   
+    var year = age_dt.getUTCFullYear(); 
+    var age = Math.abs(year - 1970); 
+    
+    $('#name_err').hide();
+    $('#email_err').hide();
+    $('#phone_err').hide();
+    $('#date_err').hide();
+
+
+    if (name == ''){
+      $('#name_err').show();
+      $('#name').focus();
+      return false;
+    }
+    
+    if (email == ''){
+      $('#email_err').show();
+      $('#email').focus();
+      return false;
+    }
+
+    if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email) === false)
+        {
+          alert("Please enter a valid email!");
+          $('#email').focus();
+          return false;
+        }
+
+    if (phone == ''){
+      $('#phone_err').show();
+      $('#phone').focus();
+      return false;
+    }
+    if (date == ''){
+      $('#date_err').show();
+      $('#date').focus();
+      return false;
+    }
+    
+    if(age <  18){
+      alert("Minor age");
+      $('#date_err').show();
+      $('#date').focus();
+      return false;
+    }
+    
+   
+
+  }
+</script>
+
+           
+          
+    </body>
+
+    <script>
+  
+      {% if var1 %}
+      
+      swal("Registered!", "You have succcessfully registered!", "success");
+      
+      {% elif var2 %}
+      
+      swal("Oops!", "Something went Wrong!", "error");
+      
+    {% endif %}
+ </script>
+     
+
+</html>
